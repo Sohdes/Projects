@@ -1,0 +1,6 @@
+cd /mnt/c/Users/Soheil/Desktop/Compiler
+rm -f lex.yy.c yacc.tab.c yacc.tab.h compiler
+bison -d yacc.y
+flex lex.l
+gcc lex.yy.c yacc.tab.c -o compiler
+./compiler < input.txt
