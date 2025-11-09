@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Declare yylex and yyerror prototypes
+//  yylex and yyerror prototypes
 int yylex();
 void yyerror(const char *s);
 
-// Enable debugging
+//  Debugging
 #define YYDEBUG 1
 int yydebug = 1;
 %}
@@ -71,4 +71,5 @@ int main() {
 
 void yyerror(const char *s) {
     fprintf(stderr, "Error: %s\n", s);
+
 }
