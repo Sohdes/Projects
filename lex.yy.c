@@ -13,7 +13,6 @@
 #define FLEX_BETA
 #endif
 
-/* First, we deal with  platform-specific or compiler-specific issues. */
 
 /* begin standard C headers. */
 #include <stdio.h>
@@ -28,13 +27,10 @@
 #ifndef FLEXINT_H
 #define FLEXINT_H
 
-/* C99 systems have <inttypes.h>. Non-C99 systems may or may not. */
 
 #if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 
-/* C99 says to define __STDC_LIMIT_MACROS before including stdint.h,
- * if you want the limit (max/min) macros for int types. 
- */
+
 #ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS 1
 #endif
@@ -54,7 +50,6 @@ typedef unsigned char flex_uint8_t;
 typedef unsigned short int flex_uint16_t;
 typedef unsigned int flex_uint32_t;
 
-/* Limits of integral types. */
 #ifndef INT8_MIN
 #define INT8_MIN               (-128)
 #endif
@@ -91,9 +86,6 @@ typedef unsigned int flex_uint32_t;
 
 #endif /* ! FLEXINT_H */
 
-/* begin standard C++ headers. */
-
-/* TODO: this is always defined, so inline it */
 #define yyconst const
 
 #if defined(__GNUC__) && __GNUC__ >= 3
@@ -105,20 +97,12 @@ typedef unsigned int flex_uint32_t;
 /* Returned upon end-of-file. */
 #define YY_NULL 0
 
-/* Promotes a possibly negative, possibly signed char to an
- *   integer in range [0..255] for use as an array index.
- */
+
 #define YY_SC_TO_UI(c) ((YY_CHAR) (c))
 
-/* Enter a start condition.  This macro really ought to take a parameter,
- * but we do it the disgusting crufty way forced on us by the ()-less
- * definition of BEGIN.
- */
+
 #define BEGIN (yy_start) = 1 + 2 *
-/* Translate the current start state into a value that can be later handed
- * to BEGIN to return to the state.  The YYSTATE alias is for lex
- * compatibility.
- */
+
 #define YY_START (((yy_start) - 1) / 2)
 #define YYSTATE YY_START
 /* Action number for EOF rule of a given start state. */
@@ -130,18 +114,14 @@ typedef unsigned int flex_uint32_t;
 /* Size of default input buffer. */
 #ifndef YY_BUF_SIZE
 #ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k.
- * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
- * Ditto for the __ia64__ case accordingly.
- */
+
 #define YY_BUF_SIZE 32768
 #else
 #define YY_BUF_SIZE 16384
-#endif /* __ia64__ */
+#endif 
 #endif
 
-/* The state buf must be large enough to hold one state per character in the main buffer.
- */
+
 #define YY_STATE_BUF_SIZE   ((YY_BUF_SIZE + 2) * sizeof(yy_state_type))
 
 #ifndef YY_TYPEDEF_YY_BUFFER_STATE
@@ -165,7 +145,6 @@ extern FILE *yyin, *yyout;
     #define YY_LESS_LINENO(n)
     #define YY_LINENO_REWIND_TO(ptr)
     
-/* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
 	do \
 		{ \
@@ -189,94 +168,48 @@ struct yy_buffer_state
 	char *yy_ch_buf;		/* input buffer */
 	char *yy_buf_pos;		/* current position in input buffer */
 
-	/* Size of input buffer in bytes, not including room for EOB
-	 * characters.
-	 */
+
 	int yy_buf_size;
 
 	/* Number of characters read into yy_ch_buf, not including EOB
 	 * characters.
 	 */
 	int yy_n_chars;
-
-	/* Whether we "own" the buffer - i.e., we know we created it,
-	 * and can realloc() it to grow it, and should free() it to
-	 * delete it.
-	 */
 	int yy_is_our_buffer;
-
-	/* Whether this is an "interactive" input source; if so, and
-	 * if we're using stdio for input, then we want to use getc()
-	 * instead of fread(), to make sure we stop fetching input after
-	 * each newline.
-	 */
 	int yy_is_interactive;
-
-	/* Whether we're considered to be at the beginning of a line.
-	 * If so, '^' rules will be active on the next match, otherwise
-	 * not.
-	 */
 	int yy_at_bol;
 
     int yy_bs_lineno; /**< The line count. */
     int yy_bs_column; /**< The column count. */
 
-	/* Whether to try to fill the input buffer when we reach the
-	 * end of it.
-	 */
 	int yy_fill_buffer;
 
 	int yy_buffer_status;
 
 #define YY_BUFFER_NEW 0
 #define YY_BUFFER_NORMAL 1
-	/* When an EOF's been seen but there's still some text to process
-	 * then we mark the buffer as YY_EOF_PENDING, to indicate that we
-	 * shouldn't try reading from the input source any more.  We might
-	 * still have a bunch of tokens to match, though, because of
-	 * possible backing-up.
-	 *
-	 * When we actually see the EOF, we change the status to "new"
-	 * (via yyrestart()), so that the user can continue scanning by
-	 * just pointing yyin at a new input file.
-	 */
 #define YY_BUFFER_EOF_PENDING 2
 
 	};
-#endif /* !YY_STRUCT_YY_BUFFER_STATE */
+#endif 
 
-/* Stack of input buffers. */
 static size_t yy_buffer_stack_top = 0; /**< index of top of stack. */
 static size_t yy_buffer_stack_max = 0; /**< capacity of stack. */
 static YY_BUFFER_STATE * yy_buffer_stack = NULL; /**< Stack as an array. */
-
-/* We provide macros for accessing buffer states in case in the
- * future we want to put the buffer states in a more general
- * "scanner state".
- *
- * Returns the top of the stack, or NULL.
- */
 #define YY_CURRENT_BUFFER ( (yy_buffer_stack) \
                           ? (yy_buffer_stack)[(yy_buffer_stack_top)] \
                           : NULL)
-/* Same as previous macro, but useful when we know that the buffer stack is not
- * NULL or when we need an lvalue. For internal use only.
- */
-#define YY_CURRENT_BUFFER_LVALUE (yy_buffer_stack)[(yy_buffer_stack_top)]
 
-/* yy_hold_char holds the character lost when yytext is formed. */
+#define YY_CURRENT_BUFFER_LVALUE (yy_buffer_stack)[(yy_buffer_stack_top)]
 static char yy_hold_char;
-static int yy_n_chars;		/* number of characters read into yy_ch_buf */
+static int yy_n_chars;		
 int yyleng;
 
-/* Points to current character in buffer. */
-static char *yy_c_buf_p = NULL;
-static int yy_init = 0;		/* whether we need to initialize */
-static int yy_start = 0;	/* start state number */
 
-/* Flag which is used to allow yywrap()'s to do buffer switches
- * instead of setting up a fresh yyin.  A bit of a hack ...
- */
+static char *yy_c_buf_p = NULL;
+static int yy_init = 0;		
+static int yy_start = 0;	
+
 static int yy_did_buffer_switch_on_eof;
 
 void yyrestart ( FILE *input_file  );
@@ -341,10 +274,6 @@ static yy_state_type yy_get_previous_state ( void );
 static yy_state_type yy_try_NUL_trans ( yy_state_type current_state  );
 static int yy_get_next_buffer ( void );
 static void yynoreturn yy_fatal_error ( const char* msg  );
-
-/* Done after the current pattern has been matched and before the
- * corresponding action - sets up yytext.
- */
 #define YY_DO_BEFORE_ACTION \
 	(yytext_ptr) = yy_bp; \
 	yyleng = (int) (yy_cp - yy_bp); \
@@ -353,8 +282,6 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_c_buf_p) = yy_cp;
 #define YY_NUM_RULES 22
 #define YY_END_OF_BUFFER 23
-/* This struct is not used in this scanner,
-   but its presence is necessary. */
 struct yy_trans_info
 	{
 	flex_int32_t yy_verify;
@@ -472,10 +399,7 @@ char *yytext;
 #define INITIAL 0
 
 #ifndef YY_NO_UNISTD_H
-/* Special case for "unistd.h", since it is non-ANSI. We include it way
- * down here because we want the user's section 1 to have been scanned first.
- * The user has a chance to override it with an option.
- */
+
 #include <unistd.h>
 #endif
 
@@ -484,9 +408,6 @@ char *yytext;
 #endif
 
 static int yy_init_globals ( void );
-
-/* Accessor methods to globals.
-   These are made visible to non-reentrant scanners for convenience. */
 
 int yylex_destroy ( void );
 
@@ -514,9 +435,6 @@ int yyget_lineno ( void );
 
 void yyset_lineno ( int _line_number  );
 
-/* Macros after this point can all be overridden by user definitions in
- * section 1.
- */
 
 #ifndef YY_SKIP_YYWRAP
 #ifdef __cplusplus
@@ -559,17 +477,12 @@ static int input ( void );
 #endif /* __ia64__ */
 #endif
 
-/* Copy whatever the last rule matched to the standard output. */
 #ifndef ECHO
-/* This used to be an fputs(), but since the string might contain NUL's,
- * we now use fwrite().
- */
+
 #define ECHO do { if (fwrite( yytext, (size_t) yyleng, 1, yyout )) {} } while (0)
 #endif
 
-/* Gets input and stuffs it into "buf".  number of characters read, or YY_NULL,
- * is returned in "result".
- */
+
 #ifndef YY_INPUT
 #define YY_INPUT(buf,result,max_size) \
 	if ( YY_CURRENT_BUFFER_LVALUE->yy_is_interactive ) \
@@ -603,10 +516,6 @@ static int input ( void );
 
 #endif
 
-/* No semi-colon after return; correct usage is to write "yyterminate();" -
- * we don't want an extra ';' after the "return" because that will cause
- * some compilers to complain about unreachable statements.
- */
 #ifndef yyterminate
 #define yyterminate() return YY_NULL
 #endif
@@ -634,9 +543,6 @@ extern int yylex (void);
 #define YY_DECL int yylex (void)
 #endif /* !YY_DECL */
 
-/* Code executed at the beginning of each rule, after yytext and yyleng
- * have been set up.
- */
 #ifndef YY_USER_ACTION
 #define YY_USER_ACTION
 #endif
@@ -649,8 +555,6 @@ extern int yylex (void);
 #define YY_RULE_SETUP \
 	YY_USER_ACTION
 
-/** The main scanner function which does all the work.
- */
 YY_DECL
 {
 	yy_state_type yy_current_state;
@@ -695,9 +599,7 @@ YY_DECL
 		/* Support of yytext. */
 		*yy_cp = (yy_hold_char);
 
-		/* yy_bp points to the position in yy_ch_buf of the start of
-		 * the current run.
-		 */
+	
 		yy_bp = yy_cp;
 
 		yy_current_state = (yy_start);
@@ -732,12 +634,12 @@ yy_find_action:
 
 		YY_DO_BEFORE_ACTION;
 
-do_action:	/* This label is used only to access EOF actions. */
+do_action:	
 
 		switch ( yy_act )
-	{ /* beginning of action switch */
-			case 0: /* must back up */
-			/* undo the effects of YY_DO_BEFORE_ACTION */
+	{ 
+			case 0: 
+		
 			*yy_cp = (yy_hold_char);
 			yy_cp = (yy_last_accepting_cpos);
 			yy_current_state = (yy_last_accepting_state);
@@ -869,27 +771,13 @@ case YY_STATE_EOF(INITIAL):
 
 		if ( YY_CURRENT_BUFFER_LVALUE->yy_buffer_status == YY_BUFFER_NEW )
 			{
-			/* We're scanning a new file or input source.  It's
-			 * possible that this happened because the user
-			 * just pointed yyin at a new source and called
-			 * yylex().  If so, then we have to assure
-			 * consistency between YY_CURRENT_BUFFER and our
-			 * globals.  Here is the right place to do so, because
-			 * this is the first action (other than possibly a
-			 * back-up) that will match for the new input source.
-			 */
+
 			(yy_n_chars) = YY_CURRENT_BUFFER_LVALUE->yy_n_chars;
 			YY_CURRENT_BUFFER_LVALUE->yy_input_file = yyin;
 			YY_CURRENT_BUFFER_LVALUE->yy_buffer_status = YY_BUFFER_NORMAL;
 			}
 
-		/* Note that here we test for yy_c_buf_p "<=" to the position
-		 * of the first EOB in the buffer, since yy_c_buf_p will
-		 * already have been incremented past the NUL character
-		 * (since all states make transitions on EOB to the
-		 * end-of-buffer state).  Contrast this with the test
-		 * in input().
-		 */
+
 		if ( (yy_c_buf_p) <= &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[(yy_n_chars)] )
 			{ /* This was really a NUL. */
 			yy_state_type yy_next_state;
@@ -898,14 +786,6 @@ case YY_STATE_EOF(INITIAL):
 
 			yy_current_state = yy_get_previous_state(  );
 
-			/* Okay, we're now positioned to make the NUL
-			 * transition.  We couldn't have
-			 * yy_get_previous_state() go ahead and do it
-			 * for us because it doesn't know how to deal
-			 * with the possibility of jamming (and we don't
-			 * want to build jamming into it because then it
-			 * will run more slowly).
-			 */
 
 			yy_next_state = yy_try_NUL_trans( yy_current_state );
 
@@ -934,15 +814,7 @@ case YY_STATE_EOF(INITIAL):
 
 				if ( yywrap(  ) )
 					{
-					/* Note: because we've taken care in
-					 * yy_get_next_buffer() to have set up
-					 * yytext, we can now set up
-					 * yy_c_buf_p so that if some total
-					 * hoser (like flex itself) wants to
-					 * call the scanner after we return the
-					 * YY_NULL, it'll still work - another
-					 * YY_NULL will get returned.
-					 */
+
 					(yy_c_buf_p) = (yytext_ptr) + YY_MORE_ADJ;
 
 					yy_act = YY_STATE_EOF(YY_START);
@@ -988,13 +860,7 @@ case YY_STATE_EOF(INITIAL):
 	} /* end of user's declarations */
 } /* end of yylex */
 
-/* yy_get_next_buffer - try to read in a new buffer
- *
- * Returns a code representing an action:
- *	EOB_ACT_LAST_MATCH -
- *	EOB_ACT_CONTINUE_SCAN - continue scanning from current position
- *	EOB_ACT_END_OF_FILE - end of file
- */
+
 static int yy_get_next_buffer (void)
 {
     	char *dest = YY_CURRENT_BUFFER_LVALUE->yy_ch_buf;
@@ -1131,7 +997,6 @@ static int yy_get_next_buffer (void)
 	return ret_val;
 }
 
-/* yy_get_previous_state - get the state just before the EOB char was reached */
 
     static yy_state_type yy_get_previous_state (void)
 {
@@ -1259,15 +1124,6 @@ static int yy_get_next_buffer (void)
 			switch ( yy_get_next_buffer(  ) )
 				{
 				case EOB_ACT_LAST_MATCH:
-					/* This happens because yy_g_n_b()
-					 * sees that we've accumulated a
-					 * token and flags that we need to
-					 * try matching the token before
-					 * proceeding.  But for input(),
-					 * there's no matching to consider.
-					 * So convert the EOB_ACT_LAST_MATCH
-					 * to EOB_ACT_END_OF_FILE.
-					 */
 
 					/* Reset buffer status. */
 					yyrestart( yyin );
@@ -1303,11 +1159,7 @@ static int yy_get_next_buffer (void)
 }
 #endif	/* ifndef YY_NO_INPUT */
 
-/** Immediately switch to a different input stream.
- * @param input_file A readable stream.
- * 
- * @note This function does not reset the start condition to @c INITIAL .
- */
+
     void yyrestart  (FILE * input_file )
 {
     
@@ -1348,11 +1200,7 @@ static int yy_get_next_buffer (void)
 	YY_CURRENT_BUFFER_LVALUE = new_buffer;
 	yy_load_buffer_state(  );
 
-	/* We don't actually know whether we did this switch during
-	 * EOF (yywrap()) processing, but the only time this flag
-	 * is looked at is after yywrap() is called, so it's safe
-	 * to go ahead and always set it.
-	 */
+
 	(yy_did_buffer_switch_on_eof) = 1;
 }
 
@@ -1364,12 +1212,7 @@ static void yy_load_buffer_state  (void)
 	(yy_hold_char) = *(yy_c_buf_p);
 }
 
-/** Allocate and initialize an input buffer state.
- * @param file A readable stream.
- * @param size The character buffer size in bytes. When in doubt, use @c YY_BUF_SIZE.
- * 
- * @return the allocated buffer state.
- */
+
     YY_BUFFER_STATE yy_create_buffer  (FILE * file, int  size )
 {
 	YY_BUFFER_STATE b;
@@ -1380,9 +1223,7 @@ static void yy_load_buffer_state  (void)
 
 	b->yy_buf_size = size;
 
-	/* yy_ch_buf has to be 2 characters longer than the size given because
-	 * we need to put in 2 end-of-buffer characters.
-	 */
+
 	b->yy_ch_buf = (char *) yyalloc( (yy_size_t) (b->yy_buf_size + 2)  );
 	if ( ! b->yy_ch_buf )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
@@ -1394,10 +1235,7 @@ static void yy_load_buffer_state  (void)
 	return b;
 }
 
-/** Destroy the buffer.
- * @param b a buffer created with yy_create_buffer()
- * 
- */
+
     void yy_delete_buffer (YY_BUFFER_STATE  b )
 {
     
@@ -1413,10 +1251,7 @@ static void yy_load_buffer_state  (void)
 	yyfree( (void *) b  );
 }
 
-/* Initializes or reinitializes a buffer.
- * This function is sometimes called more than once on the same buffer,
- * such as during a yyrestart() or at EOF.
- */
+
     static void yy_init_buffer  (YY_BUFFER_STATE  b, FILE * file )
 
 {
@@ -1427,10 +1262,7 @@ static void yy_load_buffer_state  (void)
 	b->yy_input_file = file;
 	b->yy_fill_buffer = 1;
 
-    /* If b is the current buffer, then yy_init_buffer was _probably_
-     * called from yyrestart() or through yy_get_next_buffer.
-     * In that case, we don't want to reset the lineno or column.
-     */
+
     if (b != YY_CURRENT_BUFFER){
         b->yy_bs_lineno = 1;
         b->yy_bs_column = 0;
@@ -1441,10 +1273,7 @@ static void yy_load_buffer_state  (void)
 	errno = oerrno;
 }
 
-/** Discard all buffered characters. On the next scan, YY_INPUT will be called.
- * @param b the buffer state to be flushed, usually @c YY_CURRENT_BUFFER.
- * 
- */
+
     void yy_flush_buffer (YY_BUFFER_STATE  b )
 {
     	if ( ! b )
@@ -1452,10 +1281,7 @@ static void yy_load_buffer_state  (void)
 
 	b->yy_n_chars = 0;
 
-	/* We always need two end-of-buffer characters.  The first causes
-	 * a transition to the end-of-buffer state.  The second causes
-	 * a jam in that state.
-	 */
+
 	b->yy_ch_buf[0] = YY_END_OF_BUFFER_CHAR;
 	b->yy_ch_buf[1] = YY_END_OF_BUFFER_CHAR;
 
@@ -1468,12 +1294,7 @@ static void yy_load_buffer_state  (void)
 		yy_load_buffer_state(  );
 }
 
-/** Pushes the new state onto the stack. The new state becomes
- *  the current state. This function will allocate the stack
- *  if necessary.
- *  @param new_buffer The new state.
- *  
- */
+
 void yypush_buffer_state (YY_BUFFER_STATE new_buffer )
 {
     	if (new_buffer == NULL)
@@ -1500,10 +1321,7 @@ void yypush_buffer_state (YY_BUFFER_STATE new_buffer )
 	(yy_did_buffer_switch_on_eof) = 1;
 }
 
-/** Removes and deletes the top of the stack, if present.
- *  The next element becomes the new top.
- *  
- */
+
 void yypop_buffer_state (void)
 {
     	if (!YY_CURRENT_BUFFER)
@@ -1520,19 +1338,14 @@ void yypop_buffer_state (void)
 	}
 }
 
-/* Allocates the stack if it does not exist.
- *  Guarantees space for at least one push.
- */
+
 static void yyensure_buffer_stack (void)
 {
 	yy_size_t num_to_alloc;
     
 	if (!(yy_buffer_stack)) {
 
-		/* First allocation is just for 2 elements, since we don't know if this
-		 * scanner will even need a stack. We use 2 instead of 1 to avoid an
-		 * immediate realloc on the next call.
-         */
+
       num_to_alloc = 1; /* After all that talk, this was set to 1 anyways... */
 		(yy_buffer_stack) = (struct yy_buffer_state**)yyalloc
 								(num_to_alloc * sizeof(struct yy_buffer_state*)
@@ -1549,7 +1362,6 @@ static void yyensure_buffer_stack (void)
 
 	if ((yy_buffer_stack_top) >= ((yy_buffer_stack_max)) - 1){
 
-		/* Increase the buffer to prepare for a possible push. */
 		yy_size_t grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = (yy_buffer_stack_max) + grow_size;
@@ -1566,12 +1378,7 @@ static void yyensure_buffer_stack (void)
 	}
 }
 
-/** Setup the input buffer state to scan directly from a user-specified character buffer.
- * @param base the character buffer
- * @param size the size in bytes of the character buffer
- * 
- * @return the newly allocated buffer state object.
- */
+
 YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size )
 {
 	YY_BUFFER_STATE b;
@@ -1601,27 +1408,14 @@ YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size )
 	return b;
 }
 
-/** Setup the input buffer state to scan a string. The next call to yylex() will
- * scan from a @e copy of @a str.
- * @param yystr a NUL-terminated string to scan
- * 
- * @return the newly allocated buffer state object.
- * @note If you want to scan bytes that may contain NUL values, then use
- *       yy_scan_bytes() instead.
- */
+
 YY_BUFFER_STATE yy_scan_string (const char * yystr )
 {
     
 	return yy_scan_bytes( yystr, (int) strlen(yystr) );
 }
 
-/** Setup the input buffer state to scan the given bytes. The next call to yylex() will
- * scan from a @e copy of @a bytes.
- * @param yybytes the byte buffer to scan
- * @param _yybytes_len the number of bytes in the buffer pointed to by @a bytes.
- * 
- * @return the newly allocated buffer state object.
- */
+
 YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
 {
 	YY_BUFFER_STATE b;
@@ -1644,9 +1438,7 @@ YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
 	if ( ! b )
 		YY_FATAL_ERROR( "bad buffer in yy_scan_bytes()" );
 
-	/* It's okay to grow etc. this buffer, and we should throw it
-	 * away when we're done.
-	 */
+
 	b->yy_is_our_buffer = 1;
 
 	return b;
@@ -1679,11 +1471,7 @@ static void yynoreturn yy_fatal_error (const char* msg )
 		} \
 	while ( 0 )
 
-/* Accessor  methods (get/set functions) to struct members. */
 
-/** Get the current line number.
- * 
- */
 int yyget_lineno  (void)
 {
     
@@ -1698,9 +1486,7 @@ FILE *yyget_in  (void)
         return yyin;
 }
 
-/** Get the output stream.
- * 
- */
+
 FILE *yyget_out  (void)
 {
         return yyout;
@@ -1714,31 +1500,21 @@ int yyget_leng  (void)
         return yyleng;
 }
 
-/** Get the current token.
- * 
- */
+
 
 char *yyget_text  (void)
 {
         return yytext;
 }
 
-/** Set the current line number.
- * @param _line_number line number
- * 
- */
+
 void yyset_lineno (int  _line_number )
 {
     
     yylineno = _line_number;
 }
 
-/** Set the input stream. This does not discard the current
- * input buffer.
- * @param _in_str A readable stream.
- * 
- * @see yy_switch_to_buffer
- */
+
 void yyset_in (FILE *  _in_str )
 {
         yyin = _in_str ;
@@ -1761,9 +1537,7 @@ void yyset_debug (int  _bdebug )
 
 static int yy_init_globals (void)
 {
-        /* Initialization is the same as for the non-reentrant scanner.
-     * This function is called from yylex_destroy(), so don't allocate here.
-     */
+        
 
     (yy_buffer_stack) = NULL;
     (yy_buffer_stack_top) = 0;
@@ -1802,16 +1576,13 @@ int yylex_destroy  (void)
 	yyfree((yy_buffer_stack) );
 	(yy_buffer_stack) = NULL;
 
-    /* Reset the globals. This is important in a non-reentrant scanner so the next time
-     * yylex() is called, initialization will occur. */
+
     yy_init_globals( );
 
     return 0;
 }
 
-/*
- * Internal utility routines.
- */
+
 
 #ifndef yytext_ptr
 static void yy_flex_strncpy (char* s1, const char * s2, int n )
@@ -1842,13 +1613,7 @@ void *yyalloc (yy_size_t  size )
 void *yyrealloc  (void * ptr, yy_size_t  size )
 {
 		
-	/* The cast to (char *) in the following accommodates both
-	 * implementations that use char* generic pointers, and those
-	 * that use void* generic pointers.  It works with the latter
-	 * because both ANSI C and C++ allow castless assignment from
-	 * any pointer type to void*, and deal with argument conversions
-	 * as though doing an assignment.
-	 */
+
 	return realloc(ptr, size);
 }
 
@@ -1864,4 +1629,5 @@ void yyfree (void * ptr )
 
 int yywrap() {
     return 1;
+
 }
