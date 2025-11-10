@@ -39,9 +39,9 @@ Project 5 — 2D Arcade Game (Python)
 - **Files:**  
   - `black.py` → main game file  
   - `data.zip` → contains all tilemaps, assets, and resources  
-  - `screenshot1.png`, `screenshot2.png` → gameplay previews  
+  - `Play1.png`, `Play2.png` → gameplay previews  
 
 <p align="center">
-  <img src="screenshot1.png" width="45%" alt="Gameplay Screenshot 1">
-  <img src="screenshot2.png" width="45%" alt="Gameplay Screenshot 2">
+  <img src="Play1.png" width="45%" alt="Gameplay Screenshot 1">
+  <img src="Play2.png" width="45%" alt="Gameplay Screenshot 2">
 </p>
