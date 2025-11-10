@@ -41,7 +41,4 @@ Project 5 — 2D Arcade Game (Python)
   - `data.zip` → contains all tilemaps, assets, and resources  
   - `Play1.png`, `Play2.png` → gameplay previews  
 
-<p align="center">
-  <img src="Play1.png" width="45%" alt="Gameplay Screenshot 1">
-  <img src="Play2.png" width="45%" alt="Gameplay Screenshot 2">
-</p>
+
